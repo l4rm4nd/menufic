@@ -13,7 +13,7 @@ RUN npm cache clean --force && npm install -g npm@latest && npm install
 # Copy the rest of the project files to the container
 COPY . .
 
-RUN npm run build
+RUN cp .env.example .env && npm run build
 
 # Expose any necessary ports (if your application listens on a specific port)
 EXPOSE 3000
