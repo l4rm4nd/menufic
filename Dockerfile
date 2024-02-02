@@ -8,9 +8,13 @@ WORKDIR /app
 COPY package*.json ./
 
 # Clear npm cache (optional)
+RUN npm cache clean --force 
 # Update npm to the latest version (optional)
+RUN npm install -g npm@latest 
 # Install project dependencies
-RUN npm cache clean --force && npm install -g npm@latest && npm install && npm run build
+RUN npm install 
+# Build optimized production build
+RUN npm run build
 
 # Copy the rest of the project files to the container
 COPY . .
@@ -18,5 +22,5 @@ COPY . .
 # Expose any necessary ports (if your application listens on a specific port)
 EXPOSE 3000
 
-# Start your application
+# Start your application in production mode
 CMD ["npm", "run", "start"]
