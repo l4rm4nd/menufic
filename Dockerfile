@@ -8,13 +8,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Clear npm cache (optional)
-RUN npm cache clean --force 
-# Update npm to the latest version (optional)
-RUN npm install -g npm@latest 
-# Install project dependencies
-RUN npm install 
-# Build optimized production build
-RUN npm run build
+RUN npm cache clean --force && npm install -g npm@latest && npm install && mkdir pages && npm run build
 
 # Copy the rest of the project files to the container
 COPY . .
